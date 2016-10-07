@@ -34,10 +34,7 @@
  */
 
 static int guess_number;
-static int solution1;
-static int solution2;
-static int solution3;
-static int solution4;
+static int solution[5];
 
 int set_seed (const char seed_str[]) {
     int seed;
@@ -53,72 +50,56 @@ int set_seed (const char seed_str[]) {
 }
 
 void start_game (int* one, int* two, int* three, int* four) {
-    *one = rand()%8 + 1;
-    solution1 = *one;
+    *one = rand()%8;
+    solution[1] = *one;
 
-    *two = rand()%8 + 1;
-    solution2 = *two;
+    *two = rand()%8;
+    solution[2] = *two;
 
-    *three = rand()%8 + 1;
-    solution3 = *three;
+    *three = rand()%8;
+    solution[3] = *three;
 
-    *four = rand()%8 + 1;
-    solution4 = *four;
+    *four = rand()%8;
+    solution[4] = *four;
 
     guess_number = 1;
 }
 
 int make_guess (const char guess_str[], int* one, int* two, int* three, int* four) {
-
-    int w, x, y, z;
     char post[2];
-
-    if(sscanf(guess_str, "%d%d%d%d%1s", &w, &x, &y, &z, post) == 4) {
-        if(w < 9 && x < 9 && y < 9 && z < 9) {
+    int w,x,y,z;
+    int guess[4];
+    int result = sscanf (guess_str, "%d%d%d%d%1s", &w, &x, &y, &z, post);
+    if(result == 4) {
+        //for-loop code prep
+        guess[0] = w;
+        guess[1] = x;
+        guess[2] = y;
+        guess[3] = z; 
+        //validate input    
+        if(w < 8 && x < 8 && y < 8 && z < 8) {
             *one = w;
             *two = x;
             *three = y;
             *four = z;
 
-            int paired1, paired2, paired3, paired4 = 0;
+            int paired[4];
             int perfect_matches = 0;
             int misplaced_matches = 0;
-
-            if(w == solution1) {
-                perfect_matches++;
-                paired1 = 1;
-            }
-            if(x == solution2) {
-                perfect_matches++;
-                paired2 = 1;
-            }
-            if(y == solution3) {
-                perfect_matches++;
-                paired3 = 1;
-            }
-            if(z == solution4) {
-                perfect_matches++;
-                paired4 = 1;
-            }
-
-            if(paired1 != 1) {
-                if(w == solution2 || w == solution3 || w == solution4) {
-                    misplaced_matches++;
-                }
-            }
-            if(paired2 != 1) {
-                if(x == solution1 || x == solution3 || x == solution4) {
-                    misplaced_matches++;
-                }
-            }
-            if(paired3 != 1) {
-                if(y == solution2 || y == solution1 || y == solution4) {
-                    misplaced_matches++;
-                }
-            }
-            if(paired4 != 1) {
-                if(z == solution2 || z == solution3 || z == solution1) {
-                    misplaced_matches++;
+           
+            //nested for loops
+            int i,j;
+            for (i=0; i<4; i++) {
+                int found = 0;
+                for (j=1; j<5; j++) {
+                    if (guess[i] == solution[j]) {
+                        if (i+1 == j) {
+                            perfect_matches++;
+                            found=1;
+                        }
+                        else if (found == 0)
+                            misplaced_matches++;
+                    }
                 }
             }
 

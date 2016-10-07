@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1475846277 source:c:\users\eofl\documents\github\ece220-mp5\main.c
+	<stdio.h>
+	"prog5.h"
+
+1475846289 c:\users\eofl\documents\github\ece220-mp5\prog5.h
+
+1475851742 source:c:\users\eofl\documents\github\ece220-mp5\prog5.c
+	<stdio.h>
+	<stdlib.h>
+	"prog5.h"
+
