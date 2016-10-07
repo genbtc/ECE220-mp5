@@ -1,3 +1,4 @@
+/* MODIFIED HEAVILY BY GENBTC October 7,2016 as courtesy for DROX */
 /*
  *
  * prog5.c - source file adapted from UIUC ECE198KL Spring 2013 Program 4
@@ -34,7 +35,7 @@
  */
 
 static int guess_number;
-static int solution[5];
+static int solution[4];
 
 int set_seed (const char seed_str[]) {
     int seed;
@@ -50,17 +51,10 @@ int set_seed (const char seed_str[]) {
 }
 
 void start_game (int* one, int* two, int* three, int* four) {
-    *one = rand()%8;
-    solution[1] = *one;
-
-    *two = rand()%8;
-    solution[2] = *two;
-
-    *three = rand()%8;
-    solution[3] = *three;
-
-    *four = rand()%8;
-    solution[4] = *four;
+    solution[0] = *one = rand()%8;
+    solution[1] = *two = rand()%8;
+    solution[2] = *three = rand()%8;
+    solution[3] = *four = rand()%8;
 
     guess_number = 1;
 }
@@ -83,24 +77,30 @@ int make_guess (const char guess_str[], int* one, int* two, int* three, int* fou
             *three = y;
             *four = z;
 
-            int paired[4];
+            int paired[4] = {}; //initialized to 0 just in case we want to check paired == 0 directly instead of !=1
             int perfect_matches = 0;
             int misplaced_matches = 0;
            
-            //nested for loops
-            int i,j;
+            //loop 1: finds any perfect matches and marks them as such
+            int i;
             for (i=0; i<4; i++) {
-                for (j=1; j<5; j++) {
-                    if (guess[i] == solution[j]) {
-                        if (i+1 == j) {
-                            perfect_matches++;
-                            paired[j] = 1;
-                        }
-                        else if (paired[j] == 0)
-                            misplaced_matches++;
-                    }
+                if (guess[i] == solution[i]) {
+                    perfect_matches++;
+                    paired[i] = 1;
+                    //printf("PERFECT MATCH #: %d.\n", i+1);
                 }
             }
+            //nested loop 2: check any non perfect matches for misplaced order
+            int j;
+            for (i=0; i<4; i++) {
+                for (j=0; j<4; j++) {
+                    if (paired[i] != 1 && guess[i] == solution[j]) {
+                        misplaced_matches++;
+                        paired[i] = 1;
+                        //printf("Guess %d == Solution %d.\n", i+1,j+1);
+                    }
+                }
+            }            
 
             printf("With guess %d, you got %d perfect matches and %d misplaced matches.\n", guess_number, perfect_matches, misplaced_matches);
             guess_number++;
