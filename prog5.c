@@ -1,10 +1,12 @@
-/* MODIFIED HEAVILY BY GENBTC October 7,2016 as courtesy for DROX */
+/* MODIFIED HEAVILY BY GENBTC October 7,2016 as courtesy for DROX 
+ * ORIGINAL LOCATED @ https://github.com/ashlesha08/ece220/blob/master/MP5/prog5.c 
+ */
+ 
 /*
  *
  * prog5.c - source file adapted from UIUC ECE198KL Spring 2013 Program 4
  *           student code -- GOLD VERSION by Steven S. Lumetta
  */
-
 
 /*
  * The functions that you must write are defined in the header file.
