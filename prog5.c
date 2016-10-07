@@ -90,14 +90,13 @@ int make_guess (const char guess_str[], int* one, int* two, int* three, int* fou
             //nested for loops
             int i,j;
             for (i=0; i<4; i++) {
-                int found = 0;
                 for (j=1; j<5; j++) {
                     if (guess[i] == solution[j]) {
                         if (i+1 == j) {
                             perfect_matches++;
-                            found=1;
+                            paired[j] = 1;
                         }
-                        else if (found == 0)
+                        else if (paired[j] == 0)
                             misplaced_matches++;
                     }
                 }

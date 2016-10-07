@@ -5,8 +5,13 @@
 
 1475846289 c:\users\eofl\documents\github\ece220-mp5\prog5.h
 
-1475851742 source:c:\users\eofl\documents\github\ece220-mp5\prog5.c
+1475853193 source:c:\users\eofl\documents\github\ece220-mp5\prog5.c
 	<stdio.h>
 	<stdlib.h>
+	"prog5.h"
+
+1475523182 source:c:\users\eofl\documents\github\ece220-mp5\test.c
+	<stdlib.h>
+	<stdio.h>
 	"prog5.h"
 
